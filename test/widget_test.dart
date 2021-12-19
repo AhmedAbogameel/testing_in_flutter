@@ -11,20 +11,39 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:testing_in_flutter/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+ group('Test Counter Widget', () {
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+   testWidgets('Should be 1 on tap', (tester) async {
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+     expect(find.text('0'), findsOneWidget);
+     expect(find.text('1'), findsNothing);
+
+     final buttonFinder = find.byKey(const Key('GD'));
+
+     await tester.tap(buttonFinder);
+     await tester.pump();
+
+     expect(find.text('0'), findsNothing);
+     expect(find.text('1'), findsOneWidget);
+   });
+
+   testWidgets('Should be -1 on long tap', (tester) async {
+
+     await tester.pumpWidget(const MyApp());
+
+     expect(find.text('0'), findsOneWidget);
+     expect(find.text('1'), findsNothing);
+
+     final buttonFinder = find.byKey(const Key('GD'));
+
+     await tester.longPress(buttonFinder);
+     await tester.pump();
+
+     expect(find.text('0'), findsNothing);
+     expect(find.text('-1'), findsOneWidget);
+   });
+
+ });
 }
