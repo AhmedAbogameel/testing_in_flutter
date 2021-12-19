@@ -48,7 +48,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  HomeController controller = HomeController();
 
   void _incrementCounter() {
     setState(() {
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      controller.increment();
     });
   }
 
@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '${controller.counter}',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
@@ -112,4 +112,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+class HomeController {
+
+  int counter = 0;
+
+  void increment() => counter++;
+
+  void decrement() => counter--;
+
 }
