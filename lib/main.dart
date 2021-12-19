@@ -113,3 +113,38 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+class View extends StatefulWidget {
+  const View({Key? key}) : super(key: key);
+
+  @override
+  State<View> createState() => _ViewState();
+}
+
+class _ViewState extends State<View> {
+
+  String name = "A";
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Column(
+          children: [
+            Text(name),
+            const Text("B"),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  name += name;
+                });
+              },
+              child: const Text("C"),
+              key: const Key('TB'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
